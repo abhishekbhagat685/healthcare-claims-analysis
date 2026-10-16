@@ -1,10 +1,17 @@
-﻿# Healthcare Claims Analysis
+# Healthcare Claims Analysis
 
 ## Project Overview
 
 This project analyzes healthcare insurance claims to understand claim status, financial performance, denial reasons, follow-up requirements, and data quality issues.
 
-The project demonstrates an end-to-end data analytics workflow using **MongoDB, Python, MySQL, SQL, and Power BI**.
+It demonstrates an end-to-end data analytics workflow using MongoDB, Python, MySQL, SQL, and Power BI.
+
+## Power BI Dashboard
+
+![Dashboard overview](screenshots/dashboard_overview.png)
+![Denial analysis](screenshots/dashboard_denials.png)
+
+The interactive dashboard is saved in `powerbi/healthcare_claims_analysis.pbix`. It presents claim status, financial KPIs, denial reasons, and follow-up requirements from the cleaned dataset. Open it with Power BI Desktop (Windows).
 
 ## Business Problem
 
@@ -12,23 +19,23 @@ Healthcare claim data can contain denied claims, outstanding balances, follow-up
 
 ## Project Objectives
 
-* Analyze overall claim volume and claim status.
-* Calculate billed, allowed, paid, and outstanding amounts.
-* Identify common claim denial reasons.
-* Analyze follow-up requirements and claim aging.
-* Validate financial calculations and data quality.
-* Prepare insights for healthcare claims reporting and dashboard development.
+- Analyze overall claim volume and claim status.
+- Calculate billed, allowed, paid, and outstanding amounts.
+- Identify common claim denial reasons.
+- Analyze follow-up requirements and claim aging.
+- Validate financial calculations and data quality.
+- Present insights through SQL reports and an interactive Power BI dashboard.
 
 ## Tools and Technologies
 
-* **MongoDB:** Source data storage
-* **Python:** Data inspection, cleaning, validation, and exploratory data analysis
-* **Pandas:** Data manipulation and analysis
-* **MySQL:** Structured data storage
-* **SQL:** KPI analysis, aggregations, financial reconciliation, and validation
-* **Power BI:** Dashboard development and visualization
-* **Git and GitHub:** Version control and portfolio management
-* **VS Code:** Development environment
+- **MongoDB:** Source data storage
+- **Python:** Data inspection, cleaning, validation, and exploratory data analysis
+- **Pandas:** Data manipulation and analysis
+- **MySQL:** Structured data storage
+- **SQL:** KPI analysis, aggregations, financial reconciliation, and validation
+- **Power BI:** Dashboard development and visualization
+- **Git and GitHub:** Version control and portfolio management
+- **VS Code:** Development environment
 
 ## Project Workflow
 
@@ -38,37 +45,39 @@ Healthcare claim data can contain denied claims, outstanding balances, follow-up
 4. Export the cleaned dataset to CSV.
 5. Import the complete dataset into MySQL.
 6. Execute SQL queries to analyze claims and financial KPIs.
-7. Prepare findings and visual summaries for reporting.
+7. Build an interactive Power BI dashboard for reporting.
 
-**Data pipeline:**
+Data pipeline:
 
-MongoDB → Python Data Cleaning → CSV → MySQL → SQL Analysis → Power BI / Reporting
+```
+MongoDB → Python Data Cleaning → CSV → MySQL → SQL Analysis → Power BI
+```
 
 ## Dataset Overview
 
-The cleaned dataset contains **1,000 claim records and 17 columns**.
+The cleaned dataset contains 1,000 claim records and 17 columns.
 
 Important fields include:
 
-* `claim_id`
-* `provider_id`
-* `patient_id`
-* `date_of_service`
-* `billed_amount`
-* `allowed_amount`
-* `paid_amount`
-* `insurance_type`
-* `claim_status`
-* `reason_code`
-* `follow_up_required`
-* `ar_status`
-* `outcome`
-* `outstanding_amount`
-* `data_quality_flag`
+- `claim_id`
+- `provider_id`
+- `patient_id`
+- `date_of_service`
+- `billed_amount`
+- `allowed_amount`
+- `paid_amount`
+- `insurance_type`
+- `claim_status`
+- `reason_code`
+- `follow_up_required`
+- `ar_status`
+- `outcome`
+- `outstanding_amount`
+- `data_quality_flag`
 
 The service dates range from May 1, 2024, to September 20, 2024.
 
-> **Data privacy:** Raw healthcare data and the cleaned CSV are excluded from the GitHub repository. Do not publish patient-level or otherwise sensitive information.
+**Data note:** [State here whether the dataset is synthetic/sample or real, and which data files are included in or excluded from this repository. Do not publish real patient-level or otherwise sensitive information.]
 
 ## SQL Analysis
 
@@ -91,59 +100,59 @@ The project includes 12 SQL scripts covering the following areas:
 
 ### 1. Claim Status Distribution
 
-| Claim Status |    Claims | Percentage |
-| ------------ | --------: | ---------: |
-| Under Review |       338 |      33.8% |
-| Paid         |       334 |      33.4% |
-| Denied       |       328 |      32.8% |
-| **Total**    | **1,000** |   **100%** |
+| Claim Status | Claims | Percentage |
+|---|---:|---:|
+| Under Review | 338 | 33.8% |
+| Paid | 334 | 33.4% |
+| Denied | 328 | 32.8% |
+| **Total** | **1,000** | **100%** |
 
 The three claim-status categories have relatively similar volumes.
 
 ### 2. Financial Summary
 
-| Metric                   |  Amount |
-| ------------------------ | ------: |
-| Total Billed Amount      | 297,191 |
-| Total Allowed Amount     | 223,112 |
-| Total Paid Amount        | 200,754 |
-| Total Outstanding Amount |  22,358 |
+| Metric | Amount |
+|---|---:|
+| Total Billed Amount | 297,191 |
+| Total Allowed Amount | 223,112 |
+| Total Paid Amount | 200,754 |
+| Total Outstanding Amount | 22,358 |
 
-The financial reconciliation check returned a difference of **0**, confirming that the total outstanding amount matches the calculated difference between allowed and paid amounts in the dataset.
+The financial reconciliation check returned a difference of 0, confirming that the total outstanding amount matches the calculated difference between allowed and paid amounts in the dataset.
 
-*Currency units are not specified in the source data.*
+Currency units are not specified in the source data.
 
 ### 3. Insurance Type Distribution
 
-| Insurance Type |    Claims |
-| -------------- | --------: |
-| Commercial     |       259 |
-| Medicaid       |       259 |
-| Self-Pay       |       249 |
-| Medicare       |       233 |
-| **Total**      | **1,000** |
+| Insurance Type | Claims |
+|---|---:|
+| Commercial | 259 |
+| Medicaid | 259 |
+| Self-Pay | 249 |
+| Medicare | 233 |
+| **Total** | **1,000** |
 
 Commercial and Medicaid each account for 25.9% of the claims.
 
 ### 4. Follow-up Requirements
 
-* Follow-up required: **522 claims (52.2%)**
-* Follow-up not required: **478 claims (47.8%)**
+- Follow-up required: 522 claims (52.2%)
+- Follow-up not required: 478 claims (47.8%)
 
 More than half of the claims are marked as requiring follow-up, making follow-up tracking an important area for further analysis.
 
 ### 5. Common Denial Reasons
 
-| Denial Reason                 | Claims |
-| ----------------------------- | -----: |
-| Incorrect billing information |     49 |
-| Authorization not obtained    |     48 |
-| Pre-existing condition        |     45 |
-| Patient eligibility issues    |     41 |
-| Lack of medical necessity     |     40 |
-| Duplicate claim               |     40 |
-| Missing documentation         |     37 |
-| Service not covered           |     28 |
+| Denial Reason | Claims |
+|---|---:|
+| Incorrect billing information | 49 |
+| Authorization not obtained | 48 |
+| Pre-existing condition | 45 |
+| Patient eligibility issues | 41 |
+| Lack of medical necessity | 40 |
+| Duplicate claim | 40 |
+| Missing documentation | 37 |
+| Service not covered | 28 |
 
 Incorrect billing information and missing authorization are among the leading denial reasons in the dataset.
 
@@ -151,28 +160,31 @@ Incorrect billing information and missing authorization are among the leading de
 
 The final validation checks reported:
 
-* Total records: **1,000**
-* Unique claim IDs: **1,000**
-* Missing claim IDs: **0**
-* Missing service dates: **0**
-* Missing outstanding amounts: **0**
-* Financial reconciliation difference: **0**
+- Total records: 1,000
+- Unique claim IDs: 1,000
+- Missing claim IDs: 0
+- Missing service dates: 0
+- Missing outstanding amounts: 0
+- Financial reconciliation difference: 0
 
 Some records show differences between `claim_status` and `outcome`. These inconsistencies were identified for further investigation rather than automatically corrected.
 
 ## Project Structure
 
-```text
+```
 healthcare-claims-analysis/
 │
 ├── python/
 │   ├── 01_inspect_data.py
 │   ├── 02_data_cleaning.py
-│   ├── 03_*.py
-│   ├── 04_*.py
-│   ├── 05_*.py
-│   ├── 06_*.py
+│   ├── 03_inspect_dates.py
+│   ├── 04_eda.py
+│   ├── 05_business_validation.py
+│   ├── 06_status_investigation.py
 │   └── 07_import_csv_to_mysql.py
+│
+├── mongodb_queries/
+│   └── indexes.js
 │
 ├── sql/
 │   ├── 01_overall_claims_summary.sql
@@ -188,16 +200,16 @@ healthcare-claims-analysis/
 │   ├── 11_follow_up_summary.sql
 │   └── 12_final_data_validation.sql
 │
+├── powerbi/
+│   └── healthcare_claims_analysis.pbix
+│
 ├── screenshots/
 ├── data/
 │   ├── raw/
 │   └── processed/
 ├── .gitignore
-├── README.md
-└── requirements.txt
+└── README.md
 ```
-
-*The Python filenames marked with `*` are abbreviated here for readability. Keep the actual filenames in your repository. Remove `requirements.txt` from this structure if it does not exist, and add any other actual project files as appropriate.*
 
 ## How to Run the Project
 
@@ -222,23 +234,15 @@ Activate it in Windows PowerShell:
 
 ### 3. Install Dependencies
 
-If `requirements.txt` exists:
-
 ```bash
-pip install -r requirements.txt
-```
-
-Otherwise, install the dependencies required by your Python scripts, such as:
-
-```bash
-pip install pandas pymongo mysql-connector-python
+pip install pandas pymongo mysql-connector-python python-dotenv
 ```
 
 ### 4. Configure Environment Variables
 
 Create a local `.env` file in the project root. Use the following template and replace the placeholder with your own local MySQL password.
 
-```env
+```
 MONGODB_URI=mongodb://localhost:27017
 MONGODB_DATABASE=parul
 MONGODB_COLLECTION=patients Record
@@ -254,16 +258,16 @@ MYSQL_DATABASE=healthcare_claims_db
 
 ### 5. Run the Python Scripts
 
-Run the scripts from the project root using the actual filenames in your `python` folder. For example:
+Run the scripts from the project root in numeric order. For example:
 
-```powershell
+```bash
 python python/01_inspect_data.py
 python python/02_data_cleaning.py
 ```
 
 Run the MySQL import script only after the cleaned CSV and MySQL configuration are ready:
 
-```powershell
+```bash
 python python/07_import_csv_to_mysql.py
 ```
 
@@ -273,38 +277,36 @@ Open MySQL Workbench, connect to your local MySQL server, select the `healthcare
 
 The analysis table used in this project is:
 
-```sql
+```
 healthcare_claims_vscode
 ```
 
-### 7. Review the Visualizations
+### 7. Open the Power BI Dashboard
 
-Open the images in the `screenshots` folder to review the project's available visual summaries. If you have a saved Power BI `.pbix` dashboard, include its actual filename and opening instructions here.
+Open `powerbi/healthcare_claims_analysis.pbix` in Power BI Desktop, or view the dashboard images in the `screenshots` folder.
 
 ## Limitations
 
-* The analysis is based on the available dataset and its recorded fields.
-* Currency units are not specified in the source data.
-* Claim status and payment outcome inconsistencies require business-rule clarification.
-* Date-based claim aging uses the date of service and may not represent the actual accounts-receivable aging date.
-* The findings describe the supplied dataset and should not be interpreted as conclusions about all healthcare claims.
+- The analysis is based on the available dataset and its recorded fields.
+- Currency units are not specified in the source data.
+- Claim status and payment outcome inconsistencies require business-rule clarification.
+- Date-based claim aging uses the date of service and may not represent the actual accounts-receivable aging date.
+- The findings describe the supplied dataset and should not be interpreted as conclusions about all healthcare claims.
 
 ## Future Improvements
 
-* Develop an interactive Power BI dashboard.
-* Add deeper denial trend and provider-level analysis.
-* Investigate inconsistencies between claim status and payment outcome.
-* Introduce additional data quality and reconciliation checks.
-* Expand the analysis with validated claim-processing and A/R dates.
+- Publish the Power BI dashboard to Power BI Service.
+- Add deeper denial trend and provider-level analysis.
+- Investigate inconsistencies between claim status and payment outcome.
+- Introduce additional data quality and reconciliation checks.
+- Expand the analysis with validated claim-processing and A/R dates.
 
 ## Author
 
 **Abhishek Kumar Bhagat**
+B.Tech in Computer Science and Engineering, Parul University | 2023–2027
 
-B.Tech in Computer Science and Engineering
-Parul University | 2023–2027
-
-* GitHub: https://github.com/abhishekbhagat685
+GitHub: [abhishekbhagat685](https://github.com/abhishekbhagat685)
 
 ## Disclaimer
 
