@@ -8,7 +8,11 @@ It demonstrates an end-to-end data analytics workflow using MongoDB, Python, MyS
 
 ## Power BI Dashboard
 
+<<<<<<< HEAD
 ![Dashboard overview](screenshots/dashboard_overview.png)
+=======
+![Dashboard overview](screenshots/dashboard_overview_healthcare.png)
+>>>>>>> 75bf788 (Update README with Power BI dashboard and screenshots)
 ![Denial analysis](screenshots/dashboard_denials.png)
 
 The interactive dashboard is saved in `powerbi/healthcare_claims_analysis.pbix`. It presents claim status, financial KPIs, denial reasons, and follow-up requirements from the cleaned dataset. Open it with Power BI Desktop (Windows).
@@ -77,8 +81,12 @@ Important fields include:
 
 The service dates range from May 1, 2024, to September 20, 2024.
 
+<<<<<<< HEAD
 **Data note:** [State here whether the dataset is synthetic/sample or real, and which data files are included in or excluded from this repository. Do not publish real patient-level or otherwise sensitive information.]
 
+=======
+**Data note:** This project uses a publicly available healthcare claims dataset from Kaggle ([Healthcare dataset](https://www.kaggle.com/discussions/accomplishments/482444)), used for educational and portfolio purposes. The raw and cleaned data files are not included in this repository.
+>>>>>>> 75bf788 (Update README with Power BI dashboard and screenshots)
 ## SQL Analysis
 
 The project includes 12 SQL scripts covering the following areas:
@@ -168,6 +176,13 @@ The final validation checks reported:
 - Financial reconciliation difference: 0
 
 Some records show differences between `claim_status` and `outcome`. These inconsistencies were identified for further investigation rather than automatically corrected.
+
+## SQL Analysis Results
+
+![Claim status](screenshots/01_claim_status.png)
+![Outstanding amount by insurance type](screenshots/02_outstanding_by_insurance.png)
+![Follow-up required](screenshots/03_follow_up_required.png)
+![Denial reason codes](screenshots/04_denial_reason_codes.png)
 
 ## Project Structure
 
